@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Generalizable 3D Diffusion Model with Transformer.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Generalizable 3D Diffusion Model with Transformer</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Generalizable 3D Diffusion Model with Transformer</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=L9tbNTsAAAAJ&hl=zh-CN">Ziang Cao</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=mhaiL5MAAAAJ&hl=zh-CN&oi=ao">Fangzhou Hong</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=cLUgV4YAAAAJ&hl=zh-CN&oi=ao">Tong Wu</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=lSDISOcAAAAJ&hl=zh-CN&oi=ao">Liang Pan</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=lc45xlcAAAAJ&hl=zh-CN">Ziwei Liu</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Nanyang Technological University,</span>
+            <span class="author-block"><sup>2</sup>The Chinese University of Hong Kong</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+
+
+              <span class="link-block">
+                <a href="https://arxiv.org"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+             
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/ziangcao0312/DiffTF_code"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (coming soon)</span>
+                  </a>
+              </span>
+
+                  
+                 
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          
+          
+          <p>
+            Diffusion-based 3D generative models operating on triplane features have proven the huge potential in both performance and computational efficiency. However, most of them adopt the 2D diffusion, thereby neglecting the 3D information in triplane features. Besides, one model of existing methods works for one category. In this paper, we try to propose a 3D-aware transformer structure to comprehensively introduce 3D awareness (DiffTF). To our best known, it is the first attempt to use one model for multi-categories generation.	Specifically, we build the 3D awareness among different planes via two modules, 3D-aware encoder (decoder) and 3D-aware transformer. The former aims to map the triplane feature to high-level features with 3D awareness in an efficient way while the latter focuses on exploiting the 3D-related information in high-level space. Leveraging the 3D awareness attention, our DiffTF extracts the global interdependencies within individual planes as well as across planes efficiently. It is c
+         rucial for generating triplanes with high-quality 3D constraints. To verify the performance in a single category, we compared our method on ShapeNet with other state-of-the-art methods. Furthermore, comprehensive evaluations are conducted on the latest real-scanned dataset, \textit{i.e.}, OmniObject3D, proving the promising performance in complicated multi-categories 3D object conditions (200+ classes with some long-tailed classes).
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+
+
+    <!-- ShapeNet. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">ShapeNet</h2>
+
+        <!-- Car. -->
+        <h3 class="title is-4">Single-category: Car</h3>
+        <div class="content has-text-justified">
+          <p>
+            
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/7video.gif"
+            height="100" width="100"
+            />
+
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/20video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/26video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/28video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/59video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/63video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/65video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/67video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/69video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/70video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/91video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/104video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/108video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/127video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/128video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/131video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/146video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/147video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/162video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/165video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/173video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/187video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/196video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/201video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/205video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/207video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/car_gif/230video.gif"
+                    height="100" width="100"
+            />
+
+
+
+
+        </div>
+        <!--/ Car. -->
+
+
+<!-- Plane. -->
+        <h3 class="title is-4">Single-category: Plane</h3>
+        <div class="content has-text-justified">
+          <p>
+            
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/3video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/10video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/19video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/29video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/32video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/55video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/56video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/63video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/102video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/135video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/139video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/159video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/163video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/232video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/251video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/281video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/308video.gif"
+                    height="100" width="100"
+            />
+
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/311video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/380video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/432video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/433video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/480video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/517video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/543video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/598video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/612video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/plane_gif/613video.gif"
+                    height="100" width="100"
+            />
+
+
+
+
+
+
+
+
+        </div>
+        <!--/ Plane. -->
+
+
+
+<!-- Chair. -->
+        <h3 class="title is-4">Single-category: Chair</h3>
+        <div class="content has-text-justified">
+          <p>
+            
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/0video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/10video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/26video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/40video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/46video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/116video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/160video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/191video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/195video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/225video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/227video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/228video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/240video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/255video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/259video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/275video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/293video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/299video.gif"
+                    height="100" width="100"
+            />
+
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/320video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/323video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/351video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/480video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/501video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/504video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/544video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/568video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/chair_gif/591video.gif"
+                    height="100" width="100"
+            />
+
+
+
+
+
+        </div>
+        <!--/ Chair. -->
+
+
+
+
+      </div>
+    </div>
+    <!--/ ShapeNet. -->
+
+
+
+
+  </div>
+</section>
+
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+
+
+    <!-- ShapeNet. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">OmniObject3D</h2>
+
+        <!-- omni. -->
+        <h3 class="title is-4">Multi-category</h3>
+        <div class="content has-text-justified">
+          <p>
+            
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/5video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/9video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/11video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/22video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/35video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/51video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/54video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/71video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/72video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/73video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/81video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/104video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/105video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/106video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/108video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/120video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/122video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/123video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/140video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/152video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/188video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/197video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/205video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/222video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/225video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/251video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/253video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/260video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/277video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/281video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/283video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/288video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/289video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/290video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/301video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/331video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/342video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/347video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/351video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/354video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/371video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/393video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/397video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/420video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/429video.gif"
+                    height="100" width="100"
+            />
+
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/432video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/441video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/452video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/460video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/510video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/515video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/525video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/526video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/583video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/602video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/687video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/727video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/730video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/788video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/830video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/834video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/835video.gif"
+                    height="100" width="100"
+            />
+          <img
+            class="fit-picture"
+            src="./static/videos/omni_gif/856video.gif"
+                    height="100" width="100"
+            />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <!--/ omni. -->
+
+      </div>
+    </div>
+    <!--/ ShapeNet. -->
+
+
+
+
+  </div>
+</section>
+
+
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{cao2023difftf,
+  author    = {Cao, Ziang and Fang, Zhouhong and Wu, Tong and Pan, Liang and Liu, Ziwei},
+  title     = {Generalizable 3D Diffusion Model with Transformer},
+  journal   = {arxiv},
+  year      = {2023},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
