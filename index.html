@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Generalizable 3D Diffusion Model with Transformer.">
+        content="Large-Vocabulary 3D Diffusion Model with Transformer.">
   <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Generalizable 3D Diffusion Model with Transformer</title>
@@ -73,10 +73,10 @@
             <span class="author-block">
               <a href="https://scholar.google.com/citations?user=mhaiL5MAAAAJ&hl=zh-CN&oi=ao">Fangzhou Hong</a><sup>1</sup>,</span>
             <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=cLUgV4YAAAAJ&hl=zh-CN&oi=ao">Tong Wu</a><sup>2</sup>,
+              <a href="https://scholar.google.com/citations?user=cLUgV4YAAAAJ&hl=zh-CN&oi=ao">Tong Wu</a><sup>2,3</sup>,
             </span>
             <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=lSDISOcAAAAJ&hl=zh-CN&oi=ao">Liang Pan</a><sup>1</sup>,
+              <a href="https://scholar.google.com/citations?user=lSDISOcAAAAJ&hl=zh-CN&oi=ao">Liang Pan</a><sup>1,3</sup>,
             </span>
             <span class="author-block">
               <a href="https://scholar.google.com/citations?user=lc45xlcAAAAJ&hl=zh-CN">Ziwei Liu</a><sup>1</sup>,
@@ -84,8 +84,9 @@
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>Nanyang Technological University,</span>
-            <span class="author-block"><sup>2</sup>The Chinese University of Hong Kong</span>
+            <span class="author-block"><sup>1</sup>S-Lab, Nanyang Technological University,</span>
+            <span class="author-block"><sup>2</sup>The Chinese University of Hong Kong,</span>
+            <span class="author-block"><sup>3</sup>Shanghai AI Laboratory</span>
           </div>
 
           <div class="column has-text-centered">
@@ -111,6 +112,17 @@
                   </span>
                   <span>Code (coming soon)</span>
                   </a>
+              </span>
+
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://youtu.be/N-k2Lo73KWQ"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
               </span>
 
                   
@@ -193,15 +205,24 @@
           
           
           <p>
-            Diffusion-based 3D generative models operating on triplane features have proven the huge potential in both performance and computational efficiency. However, most of them adopt the 2D diffusion, thereby neglecting the 3D information in triplane features. Besides, one model of existing methods works for one category. In this paper, we try to propose a 3D-aware transformer structure to comprehensively introduce 3D awareness (DiffTF). To our best known, it is the first attempt to use one model for multi-categories generation.	Specifically, we build the 3D awareness among different planes via two modules, 3D-aware encoder (decoder) and 3D-aware transformer. The former aims to map the triplane feature to high-level features with 3D awareness in an efficient way while the latter focuses on exploiting the 3D-related information in high-level space. Leveraging the 3D awareness attention, our DiffTF extracts the global interdependencies within individual planes as well as across planes efficiently. It is c
-         rucial for generating triplanes with high-quality 3D constraints. To verify the performance in a single category, we compared our method on ShapeNet with other state-of-the-art methods. Furthermore, comprehensive evaluations are conducted on the latest real-scanned dataset, \textit{i.e.}, OmniObject3D, proving the promising performance in complicated multi-categories 3D object conditions (200+ classes with some long-tailed classes).
+            With the expansion of 3D-related industries, generating diverse high-quality 3D assets has been a pressing requirement. However, most existing generative works still leave much to be desired in terms of semantic information, texture, and geometric details, especially in large-vocabulary 3D object generation. In this paper, we propose a novel triplane-based 3D-aware \textbf{Diff}usion pipeline with \textbf{T}rans\textbf{F}ormer, \textbf{DiffTF}, for general 3D object generation. Treating the triplane as three separate planes and adopting 2D diffusion would result in a lack of 3D-related information, thereby impeding the generative performance, especially in complicated categories. Therefore, we try to exploit the global 3D relations in terms of texture and geometry within triplanes for tackling the special challenge of large-vocabulary 3D objects. Specifically, our transformer module extracts general 3D awareness by learning the cross-plane relations among different planes from diverse objects. Besides, our module can also exploit the global 2D interdependencies in individual planes to provide more semantic and texture information. In addition, we build 3D-aware encoder/decoder modules to maintain the 3D constraints in triplanes efficiently and enhance cross-plane relations. Extensive experiments on ShapeNet and OmniObject3D with more than 200 diverse categories strongly demonstrate that DiffTF achieves superior single-category and large-vocabulary 3D object generation performance in terms of high diversity, rich semantics, and remarkable quality.
           </p>
         </div>
       </div>
     </div>
     <!--/ Abstract. -->
 
-
+<!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Demo Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/N-k2Lo73KWQ?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
   </div>
 </section>
 
@@ -215,19 +236,7 @@
 <!-- ShapeNet. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Demo video</h2>
-
-
-        <div class="content has-text-centered">
-          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/video.mp4"
-                    type="video/mp4">
-          </video>
-
-
-
-
-        </div>
+        
         <!--/ Car. -->
 
 
